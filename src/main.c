@@ -1,0 +1,5 @@
+#include <runner.h>
+
+MAIN()
+{
+}
