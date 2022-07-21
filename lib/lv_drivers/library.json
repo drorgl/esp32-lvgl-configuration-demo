@@ -7,7 +7,15 @@
         "type": "git",
         "url": "https://github.com/littlevgl/lv_drivers.git"
     },
+    "dependencies":[
+        {
+            "name":"SDL2"
+        }
+    ],
     "build": {
-        "includeDir": "."
+        "includeDir": ".",
+        "srcFilter" : [
+            "-<display/ILI9341.c>"
+        ]
     }
 }

@@ -1,0 +1,11 @@
+
+menu "SDL2 Configuration"
+    config SDL_HOR_RES
+        int "SDL Horizontal Resolution"
+        default 480
+    
+    config SDL_VER_RES
+        int "SDL Vertical Resolution"
+        default 320
+    
+endmenu

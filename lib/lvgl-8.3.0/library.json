@@ -8,7 +8,14 @@
 		"url": "https://github.com/lvgl/lvgl.git"
 	},
 	"build": {
-		"includeDir": "."
+		"includeDir": ".",
+		"srcDir":"./",
+		"srcFilter" : [
+			"-<*>",
+			"+<src>",
+			"+<demos>",
+			"+<examples>"
+		]
 	},
 	"license": "MIT",
 	"homepage": "https://lvgl.io",

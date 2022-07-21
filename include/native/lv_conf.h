@@ -1,4 +1,11 @@
 // Configured by Dror Gluska
+
+#ifndef LV_CONF_H
+#define LV_CONF_H
+#endif
+
+#include "lvgl_native_drivers.h"
+
 #define CONFIG_LV_CONF_SKIP 1
 #define CONFIG_LV_COLOR_DEPTH_16 1
 #define CONFIG_LV_COLOR_DEPTH 16

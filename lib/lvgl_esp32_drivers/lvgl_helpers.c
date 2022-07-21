@@ -7,6 +7,7 @@
  *      INCLUDES
  *********************/
 #include "sdkconfig.h"
+#include "lv_conf.h"
 #include "lvgl_helpers.h"
 #include "esp_log.h"
 

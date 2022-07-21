@@ -27,6 +27,13 @@ def menuconfig_callback(*arg, **kwargs):
     save_settings = env.GetProjectOption("custom_lvgl_esp32_drivers_kconfig_save_settings", "");
     output_header_file = env.GetProjectOption("custom_lvgl_esp32_drivers_kconfig_output_header", "")
 
+    include_header = """
+#ifndef SPI_HOST_MAX
+#define SPI_HOST_MAX 4
+#endif
+"""
+
+
     mkdir_p(os.path.dirname(save_settings))
     mkdir_p(os.path.dirname(output_header_file))
 
@@ -39,7 +46,7 @@ def menuconfig_callback(*arg, **kwargs):
     envlist["KCONFIG_CONFIG"] = save_settings
     envlist["KCONFIG_CONFIG_HEADER"] = "#" + "\n#".join(comment) + "\n"
     envlist["KCONFIG_AUTOHEADER"] = output_header_file
-    envlist["KCONFIG_AUTOHEADER_HEADER"] = "// " + "\n// ".join(comment) + "\n"
+    envlist["KCONFIG_AUTOHEADER_HEADER"] = "// " + "\n// ".join(comment) + "\n" + include_header + "\n"
 
     if os.name == 'nt':
         subprocess.call(["menuconfig", config_file], env=envlist, creationflags=subprocess.CREATE_NEW_CONSOLE)
@@ -52,9 +59,9 @@ def menuconfig_callback(*arg, **kwargs):
  
 
 env.AddCustomTarget(
-    "lvgl-esp32-drivers-kconfig",
+    "lvgl-esp32-drivers-config",
     None,
     menuconfig_callback,
-    title="lvgl-esp32-drivers-kconfig",
-    description="Executes lvgl esp32 drivers kconfig")
+    title="lvgl-esp32-drivers-config",
+    description="Executes lvgl esp32 drivers config")
 

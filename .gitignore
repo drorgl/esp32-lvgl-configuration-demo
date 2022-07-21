@@ -4,3 +4,7 @@
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+sdkconfig.esp32.old
+include/esp32/lvgl_esp32_drivers.config.old
+include/native/lv_conf.config.old
+include/native/lvgl_native_drivers.config.old
