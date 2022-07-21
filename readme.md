@@ -1,6 +1,6 @@
-# ESP32 LVGL Workflow Demo
+# ESP32 LVGL Configuration Demo
 
-This is a demo and an example how to work with LVGL.
+This is a demo and an example how to work with configurable LVGL in ESP32 and Native (Desktop) configurations
 
 # Setup
 [ ] git init
@@ -73,7 +73,23 @@ This is a demo and an example how to work with LVGL.
 # Configuration
 to see which targets and configurations are configured:
 ```
-pio run --list-targets
+> pio run --list-targets
+Environment    Group     Name                        Title                        Description
+-------------  --------  --------------------------  ---------------------------  -----------------------------------
+native         Custom    lvgl-config                 lvgl-config                  Executes lvgl config
+native         Custom    lvgl-esp32-drivers-config   lvgl-esp32-drivers-config    Executes lvgl esp32 drivers config
+native         Custom    lvgl-native-drivers-config  lvgl-native-drivers-config   Executes lvgl native drivers config
+
+esp32          Custom    lvgl-config                 lvgl-config                  Executes lvgl config
+esp32          Custom    lvgl-esp32-drivers-config   lvgl-esp32-drivers-config    Executes lvgl esp32 drivers config
+esp32          Custom    lvgl-native-drivers-config  lvgl-native-drivers-config   Executes lvgl native drivers config
+esp32          Platform  buildfs                     Build Filesystem Image
+esp32          Platform  erase                       Erase Flash
+esp32          Platform  menuconfig                  Run Menuconfig
+esp32          Platform  size                        Program Size                 Calculate program size
+esp32          Platform  upload                      Upload
+esp32          Platform  uploadfs                    Upload Filesystem Image
+esp32          Platform  uploadfsota                 Upload Filesystem Image OTA
 ```
 
 
@@ -81,6 +97,7 @@ to configure lvgl for each environment, for esp32:
 ```
 pio run -e esp32 -t lvgl-config
 ```
+![lvgl configuration](documentation/lvgl_configuration.png?raw=true "lvgl configuration")
 
 and for native
 ```
@@ -92,10 +109,13 @@ to configure lvgl esp32 drivers:
 pio run -e esp32 -t lvgl-esp32-drivers-config
 ```
 
+![esp32 drivers configuration](documentation/esp32_drivers_configuration.png?raw=true "esp32 drivers configuration")
+
 to configure lvgl native driver (SDL2):
 ```
 pio run -e native -t lvgl-native-drivers-config
 ```
+![native drivers configuration](documentation/sdl_driver_configuration.png?raw=true "native drivers configuration")
 
 # Installing SDL2
 SDL2 is required to display LVGL on the Desktop, SDL2 has 3 parts:
