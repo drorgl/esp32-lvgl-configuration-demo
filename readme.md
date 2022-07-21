@@ -3,17 +3,19 @@
 This is a demo and an example how to work with configurable LVGL in ESP32 and Native (Desktop) configurations
 
 # Setup
-[ ] git init
-[ ] pio init
-[ ] Extract latest release from https://github.com/lvgl/lvgl/releases into lib/lvgl
+1. git init
+2. pio init
+3. Extract latest release from https://github.com/lvgl/lvgl/releases into lib/lvgl
 
-    [ ] copy library.json from this project
-    [ ] modify library.json build section and remove demo and examples if its not relevant to your project
+    a. copy library.json from this project
 
-[ ] Extract latest source from https://github.com/lvgl/lv_drivers into lib/lv_drivers
+    b. modify library.json build section and remove demo and examples if its not relevant to your project
 
-    [ ] copy lv_drv_conf_template.h to include/native/lv_drv_conf.h and enable the file (change #if 0 to 1)
-    [ ] modify library.json to include SDL dependency
+4. Extract latest source from https://github.com/lvgl/lv_drivers into lib/lv_drivers
+
+    a. copy lv_drv_conf_template.h to include/native/lv_drv_conf.h and enable the file (change #if 0 to 1)
+
+    b. modify library.json to include SDL dependency
     ```
     "dependencies":[
         {
@@ -21,7 +23,7 @@ This is a demo and an example how to work with configurable LVGL in ESP32 and Na
         }
     ],
     ```
-    [ ] modify library.json to remove an incompatible source file
+    c. modify library.json to remove an incompatible source file
     ```
     "build": {
         "srcFilter" : [
@@ -29,7 +31,7 @@ This is a demo and an example how to work with configurable LVGL in ESP32 and Na
         ]
     }
     ```
-    [ ] update include/native/lv_drv_conf.h in appropriate places
+    d. update include/native/lv_drv_conf.h in appropriate places
     ```
     #include "lvgl_native_drivers.h"
     # define USE_SDL 1
@@ -37,36 +39,37 @@ This is a demo and an example how to work with configurable LVGL in ESP32 and Na
     #  define SDL_VER_RES     CONFIG_SDL_VER_RES
     ```
 
-[ ] Extract latest source from https://github.com/lvgl/lvgl_esp32_drivers into lib/lvgl_esp32_drivers and copy the library.json from this project
+5. Extract latest source from https://github.com/lvgl/lvgl_esp32_drivers into lib/lvgl_esp32_drivers and copy the library.json from this project
 
-    [ ] copy library.json from this project, it removes compilation to incompatible files and sets its framework to espressif only
-    [ ] modify lvgl_helper.c to include "lv_conf.h' right after "sdkconfig.h", the vanilla setup assumes your lvgl is part of esp32 components which can make desktop configuration a problem.
+    a. copy library.json from this project, it removes compilation to incompatible files and sets its framework to espressif only
+
+    b. modify lvgl_helper.c to include "lv_conf.h' right after "sdkconfig.h", the vanilla setup assumes your lvgl is part of esp32 components which can make desktop configuration a problem.
     ```
     #include "sdkconfig.h"
     #include "lv_conf.h"
     ```
 
-[ ] Add lvgl kconfig script (run_lvgl_kconfig.py) and custom_lvgl_kconfig_save_settings, custom_lvgl_kconfig_output_header,  custom_lvgl_kconfig_include_headers and custom_lvgl_kconfig_include_headers configuration sections to each relevant environment in platformio.ini
-[ ] Add lvgl esp32 drivers kconfig script (run_lvgl_esp32_drivers_kconfig.py) and custom_lvgl_esp32_drivers_kconfig_save_settings, custom_lvgl_esp32_drivers_kconfig_output_header configuration section to each relevant environment in platformio.ini
-[ ] Add specific include folder in build_flags for each environment in platformio.ini (-I include/esp32 and -I include/native)
-[ ] Add the runner library from this project, it simplifies cross execution environments.
-[ ] Add SDL2 to lib, see instructions below
+6. Add lvgl kconfig script (run_lvgl_kconfig.py) and custom_lvgl_kconfig_save_settings, custom_lvgl_kconfig_output_header,  custom_lvgl_kconfig_include_headers and custom_lvgl_kconfig_include_headers configuration sections to each relevant environment in platformio.ini
+7. Add lvgl esp32 drivers kconfig script (run_lvgl_esp32_drivers_kconfig.py) and custom_lvgl_esp32_drivers_kconfig_save_settings, custom_lvgl_esp32_drivers_kconfig_output_header configuration section to each relevant environment in platformio.ini
+8. Add specific include folder in build_flags for each environment in platformio.ini (-I include/esp32 and -I include/native)
+9. Add the runner library from this project, it simplifies cross execution environments.
+10. Add SDL2 to lib, see instructions below
 
-    [ ] Copy library.json from this project to your SDL library
+    a. Copy library.json from this project to your SDL library
 
-[ ] Add script run_lvgl_native_drivers_kconfig.py with custom_lvgl_native_drivers_kconfig_save_settings and custom_lvgl_native_drivers_kconfig_output_header configuration keys
-[ ] Add build_flags to relevant environments in platformio.ini so it reflect there is a custom configuration file in include folder:
+11. Add script run_lvgl_native_drivers_kconfig.py with custom_lvgl_native_drivers_kconfig_save_settings and custom_lvgl_native_drivers_kconfig_output_header configuration keys
+12. Add build_flags to relevant environments in platformio.ini so it reflect there is a custom configuration file in include folder:
 ```
     -DLV_LVGL_H_INCLUDE_SIMPLE
     -DLV_CONF_INCLUDE_SIMPLE
     -DLV_CONF_PATH=lv_conf.h
 ```
-[ ] copy lvgl_hal from this project to your lib folder, this library abstracts lvgl on esp32 and desktop, you may need to modify it to your environment / programming style.
-[ ] configure esp32 menuconfig to enable PSRAM and increase its speed to 80Mhz (see sdkconfig.esp32)
-[ ] run ```pio run -e esp32 -t lvgl-esp32-drivers-config``` to configure your hardware.
-[ ] run ```pio run -e native -t lvgl-native-drivers-config``` to configure your desktop.
-[ ] run ```pio run -e esp32 -t lvgl-config``` to configre lvgl for your hardware
-[ ] run ```pio run -e native -t lvgl-config``` to configure lvgl for your desktop (can be different but really should be the same or very similar)
+13. copy lvgl_hal from this project to your lib folder, this library abstracts lvgl on esp32 and desktop, you may need to modify it to your environment / programming style.
+14. configure esp32 menuconfig to enable PSRAM and increase its speed to 80Mhz (see sdkconfig.esp32)
+15. run ```pio run -e esp32 -t lvgl-esp32-drivers-config``` to configure your hardware.
+16. run ```pio run -e native -t lvgl-native-drivers-config``` to configure your desktop.
+17. run ```pio run -e esp32 -t lvgl-config``` to configre lvgl for your hardware
+18. run ```pio run -e native -t lvgl-config``` to configure lvgl for your desktop (can be different but really should be the same or very similar)
 
 
 
@@ -93,25 +96,25 @@ esp32          Platform  uploadfsota                 Upload Filesystem Image OTA
 ```
 
 
-to configure lvgl for each environment, for esp32:
+### to configure lvgl for each environment, for esp32:
 ```
 pio run -e esp32 -t lvgl-config
 ```
 ![lvgl configuration](documentation/lvgl_configuration.png?raw=true "lvgl configuration")
 
-and for native
+### and for native
 ```
 pio run -e native -t lvgl-config
 ```
 
-to configure lvgl esp32 drivers:
+### to configure lvgl esp32 drivers:
 ```
 pio run -e esp32 -t lvgl-esp32-drivers-config
 ```
 
 ![esp32 drivers configuration](documentation/esp32_drivers_configuration.png?raw=true "esp32 drivers configuration")
 
-to configure lvgl native driver (SDL2):
+### to configure lvgl native driver (SDL2):
 ```
 pio run -e native -t lvgl-native-drivers-config
 ```
