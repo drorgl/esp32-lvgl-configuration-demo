@@ -38,7 +38,7 @@ void hal_setup(void)
     lv_disp_drv_register(&disp_drv);
 
 #if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE
-    lv_indev_drv_t indev_drv;
+    static lv_indev_drv_t indev_drv;
     lv_indev_drv_init(&indev_drv);
     indev_drv.read_cb = touch_driver_read;
     indev_drv.type = LV_INDEV_TYPE_POINTER;
@@ -49,7 +49,7 @@ void hal_setup(void)
         .callback = &lv_tick_task,
         .name = "periodic_gui"};
 
-    esp_timer_handle_t periodic_timer;
+    static esp_timer_handle_t periodic_timer;
     ESP_ERROR_CHECK(esp_timer_create(&periodic_timer_args, &periodic_timer));
     ESP_ERROR_CHECK(esp_timer_start_periodic(periodic_timer, LV_TICK_PERIOD_MS * 1000));
 }
