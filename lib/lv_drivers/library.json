@@ -14,7 +14,9 @@
     ],
     "build": {
         "includeDir": ".",
+        "srcDir":"./",
         "srcFilter" : [
+            "+<*>",
             "-<display/ILI9341.c>"
         ]
     }
