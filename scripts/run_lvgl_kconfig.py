@@ -4,10 +4,11 @@ import os
 import os.path
 import errno
 
-subprocess.run("pip -q install kconfiglib windows-curses")
 
 if os.name == 'nt':
-    subprocess.run("pip -q install kconfiglib")
+    subprocess.run("pip3 -q install kconfiglib windows-curses")
+else:
+    subprocess.run("pip3 -q install kconfiglib",shell=True)
 
 # Taken from https://stackoverflow.com/a/600612/119527
 def mkdir_p(path):
