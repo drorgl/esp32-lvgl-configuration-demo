@@ -17,7 +17,13 @@
         "srcDir":"./",
         "srcFilter" : [
             "+<*>",
-            "-<display/ILI9341.c>"
+            "-<display/*>",
+            "-<indev/*>",
+            "-<gtkdrv/*>",
+            "-<win32drv/*>",
+            "-<wayland/*>",
+            "-<sdl/*>",
+            "-<win_drv.c>"
         ]
     }
 }
